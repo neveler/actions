@@ -40,4 +40,8 @@ jobs:
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git push -f git@github.com:${{ matrix.task.target.repository }}.git ${{ matrix.task.source.ref }}:${{ matrix.task.target.ref }}
+          for target in $(echo '${{ toJSON(matrix.task.targets) }}' | jq -c '.[]'); do
+            repo=$(echo $target | jq -r '.repository')
+            ref=$(echo $target | jq -r '.ref')
+            git push -f git@github.com:$repo.git ${{ matrix.task.source.ref }}:$ref
+          done
