@@ -7,21 +7,37 @@ jobs:
   config:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ env.matrix }}
+      tasks: ${{ env.tasks }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Config
         run: |
           {
-            echo 'matrix<<EOF'
+            echo 'tasks<<EOF'
             cat data/auto-sync-upstream-branch.json
             echo EOF
           } >> "$GITHUB_ENV"
-  test:
+  sync:
     needs: config
+    strategy:
+      fail-fast: false
+      matrix:
+        task: ${{ fromJSON(needs.config.outputs.tasks) }}
     runs-on: ubuntu-latest
     steps:
-      - name: Test
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          repository: ${{ matrix.task.source.repository }}
+          ref: ${{ matrix.task.source.ref }}
+          fetch-depth: 0
+      - name: Sync
         run: |
-          echo "${{ fromJSON(needs.config.outputs.matrix) }}"
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git push -f git@github.com:${{ matrix.target.repository }}.git ${{ matrix.source.ref }}:${{ matrix.target.ref }}
