@@ -1,0 +1,30 @@
+[
+  {
+    "source": {
+      "repository": "HMCL-dev/HMCL",
+      "ref": "main"
+    },
+    "target": [
+      {
+        "repository": "neveler/HMCL",
+        "ref": "main"
+      }
+    ]
+  },
+  {
+    "source": {
+      "repository": "HMCL-dev/HMCL-docs",
+      "ref": "main"
+    },
+    "targets": [
+      {
+        "repository": "neveler/HMCL-docs",
+        "ref": "main"
+      },
+      {
+        "repository": "neveler/HMCL-docs",
+        "ref": "dev"
+      },
+    ]
+  }
+]
