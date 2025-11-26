@@ -24,4 +24,4 @@ jobs:
     steps:
       - name: Test
         run: |
-          echo "${{ needs.config.outputs.matrix }}"
+          echo "${{ fromJSON(needs.config.outputs.matrix) }}"
