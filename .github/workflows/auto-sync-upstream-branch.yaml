@@ -14,8 +14,8 @@ jobs:
           {
             echo 'matrix<<EOF'
             cat data/auto-sync-upstream-branch.json
-            echo 'EOF'
-          } >> $GITHUB_OUTPUT
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
           cat $GITHUB_OUTPUT
   sync:
     needs: config
@@ -39,5 +39,6 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git push -f git@github.com:${{ matrix.target.repository }}.git ${{ matrix.source.ref }}:${{ matrix.target.ref }}
+
 
 
