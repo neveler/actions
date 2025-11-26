@@ -1,0 +1,12 @@
+[
+  {
+    "source": {
+      "repository": "HMCL-dev/HMCL",
+      "ref": "main"
+    },
+    "target": {
+      "repository": "neveler/HMCL",
+      "ref": "main"
+    }
+  }
+]
