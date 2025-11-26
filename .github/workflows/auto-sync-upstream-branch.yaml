@@ -18,29 +18,10 @@ jobs:
             cat data/auto-sync-upstream-branch.json
             echo EOF
           } >> "$GITHUB_ENV"
-  sync:
+  test:
     needs: config
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJSON(needs.config.outputs.matrix) }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          repository: ${{ matrix.source.repository }}
-          ref: ${{ matrix.source.ref }}
-          fetch-depth: 0
-      - name: Sync
+      - name: Test
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git push -f git@github.com:${{ matrix.target.repository }}.git ${{ matrix.source.ref }}:${{ matrix.target.ref }}
-
-
-
-
+          echo "${{ needs.config.outputs.matrix }}"
