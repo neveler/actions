@@ -1,0 +1,14 @@
+[
+  {
+    "source": "https://github.com/HMCL-dev/HMCL.git",
+    "targets": [
+      "neveler/HMCL"
+    ]
+  },
+  {
+    "source": "https://github.com/HMCL-dev/HMCL-docs.git",
+    "targets": [
+      "neveler/HMCL-docs"
+    ]
+  }
+]
