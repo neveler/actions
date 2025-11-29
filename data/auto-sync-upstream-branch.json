@@ -8,7 +8,6 @@
   {
     "source": "https://github.com/HMCL-dev/HMCL-docs.git",
     "targets": [
-      "neveler/HMCL-docs",
       "neveler/HMCL-docs"
     ]
   }
