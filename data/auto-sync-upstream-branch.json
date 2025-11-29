@@ -1,7 +1,7 @@
 [
   {
     "source": "https://github.com/HMCL-dev/HMCL.git",
-    "target": [
+    "targets": [
       "neveler/HMCL"
     ]
   },
