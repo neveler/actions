@@ -11,11 +11,5 @@
       "neveler/HMCL-docs",
       "hmcl-docs/HMCL-docs"
     ]
-  },
-  {
-    "source": "https://github.com/burningtnt/Terracotta.git",
-    "targets": [
-      "neveler/Terracotta"
-    ]
   }
 ]
