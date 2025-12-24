@@ -1,0 +1,17 @@
+name: Winget Create
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: command
+        required: true
+        type: string
+jobs:
+  winget-create:
+    runs-on: windows-2022
+    steps:
+      - name: winget-create
+        run: |
+          Invoke-WebRequest "https://aka.ms/wingetcreate/latest" -OutFile "wingetcreate.exe"
+          .\wingetcreate.exe token --store --token ${{ secrets.WINGET_TOKEN }}
+          ${{ inputs.command }}
