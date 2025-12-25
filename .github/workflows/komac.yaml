@@ -15,5 +15,6 @@ jobs:
         with:
           args: |
             --version
-            komac token add --token ${{ secrets.WINGET_TOKEN }}
             ${{ inputs.command }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.WINGET_TOKEN  }}
