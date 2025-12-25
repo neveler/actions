@@ -12,10 +12,6 @@ jobs:
     steps:
       - name: komac
         run: |
-          wget -O komac.deb ${{ env.KOMAC_DEB_DOWNLOAD_URL }}
-          sudo apt install ./komac.deb -y
-          rm ./komac.deb
+          cargo binstall komac@latest -y
           komac token add --token ${{ secrets.WINGET_TOKEN }}
           ${{ inputs.command }}
-        env:
-          KOMAC_DEB_DOWNLOAD_URL: https://github.com/russellbanks/Komac/releases/download/v2.14.0/komac_2.14.0-1_amd64.deb
