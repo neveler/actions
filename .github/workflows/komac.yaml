@@ -10,8 +10,9 @@ jobs:
   komac:
     runs-on: ubuntu-latest
     steps:
+      - uses: cargo-bins/cargo-binstall@main
       - name: komac
         run: |
-          cargo install --locked komac
+          cargo binstall komac -y
           komac token add --token ${{ secrets.WINGET_TOKEN }}
           ${{ inputs.command }}
