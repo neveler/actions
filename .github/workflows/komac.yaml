@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: komac
         run: |
-          cargo binstall komac@latest -y
+          cargo install --locked komac
           komac token add --token ${{ secrets.WINGET_TOKEN }}
           ${{ inputs.command }}
