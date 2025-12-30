@@ -11,10 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: komac
-        uses: michidk/run-komac@v2
-        with:
-          args: |
-            --version
-            ${{ inputs.command }}
+        run: |
+          wget -O komac.deb ${{ env.KOMAC_DEB_DOWNLOAD_URL }}
+          sudo apt install ./komac.deb -y
+          rm ./komac.deb
+          ${{ inputs.command }}
         env:
           GITHUB_TOKEN: ${{ secrets.WINGET_TOKEN  }}
+          KOMAC_DEB_DOWNLOAD_URL: https://github.com/russellbanks/Komac/releases/download/v2.14.0/komac_2.14.0-1_amd64.deb
